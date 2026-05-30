@@ -1,36 +1,62 @@
 # Careers Backend API Documentation
 
+## Project Overview
+
+This backend provides Career Management APIs for the Careers page. It allows frontend applications to perform CRUD (Create, Read, Update, Delete) operations on job postings.
+
+---
+
+## Technology Stack
+
+* Node.js
+* Express.js
+* MongoDB Atlas
+* Mongoose
+* REST API
+
+---
+
 ## Base URL
 
-### Local Development
+Public Testing URL:
 
-```http
+https://going-scam-unclamped.ngrok-free.dev
+
+Local Development URL:
+
 http://localhost:5000
-```
 
-### Production
+---
 
-```http
-https://your-deployed-url.com
+# Career Object Structure
+
+```json
+{
+  "jobTitle": "Frontend Developer",
+  "department": "Engineering",
+  "location": "Remote",
+  "experience": "2+ Years",
+  "description": "React Developer Role",
+  "skills": ["React", "JavaScript"],
+  "applyLink": "https://company.com/apply"
+}
 ```
 
 ---
 
-# Careers API
+# API Endpoints
 
 ## 1. Get All Careers
 
-### Endpoint
+### Request
 
-```http
 GET /api/careers
-```
 
-### Description
+### Example
 
-Fetch all available career opportunities.
+GET https://going-scam-unclamped.ngrok-free.dev/api/careers
 
-### Response
+### Success Response
 
 ```json
 {
@@ -38,20 +64,14 @@ Fetch all available career opportunities.
   "count": 2,
   "data": [
     {
-      "_id": "685a123456",
+      "_id": "6839abcd1234",
       "jobTitle": "Frontend Developer",
       "department": "Engineering",
       "location": "Remote",
-      "experience": "1-3 Years",
-      "description": "React Developer Required",
-      "skills": [
-        "React",
-        "JavaScript",
-        "Tailwind CSS"
-      ],
-      "applyLink": "https://company.com/apply",
-      "createdAt": "2026-05-30T10:00:00.000Z",
-      "updatedAt": "2026-05-30T10:00:00.000Z"
+      "experience": "2+ Years",
+      "description": "React Developer Role",
+      "skills": ["React", "JavaScript"],
+      "applyLink": "https://company.com/apply"
     }
   ]
 }
@@ -59,36 +79,29 @@ Fetch all available career opportunities.
 
 ---
 
-## 2. Get Single Career
+## 2. Get Career By ID
 
-### Endpoint
+### Request
 
-```http
 GET /api/careers/:id
-```
 
 ### Example
 
-```http
-GET /api/careers/685a123456
-```
+GET https://going-scam-unclamped.ngrok-free.dev/api/careers/6839abcd1234
 
-### Response
+### Success Response
 
 ```json
 {
   "success": true,
   "data": {
-    "_id": "685a123456",
+    "_id": "6839abcd1234",
     "jobTitle": "Frontend Developer",
     "department": "Engineering",
     "location": "Remote",
-    "experience": "1-3 Years",
-    "description": "React Developer Required",
-    "skills": [
-      "React",
-      "JavaScript"
-    ],
+    "experience": "2+ Years",
+    "description": "React Developer Role",
+    "skills": ["React", "JavaScript"],
     "applyLink": "https://company.com/apply"
   }
 }
@@ -98,11 +111,13 @@ GET /api/careers/685a123456
 
 ## 3. Create Career
 
-### Endpoint
+### Request
 
-```http
 POST /api/careers
-```
+
+### Headers
+
+Content-Type: application/json
 
 ### Request Body
 
@@ -111,13 +126,9 @@ POST /api/careers
   "jobTitle": "Frontend Developer",
   "department": "Engineering",
   "location": "Remote",
-  "experience": "1-3 Years",
-  "description": "React Developer Required",
-  "skills": [
-    "React",
-    "JavaScript",
-    "Tailwind CSS"
-  ],
+  "experience": "2+ Years",
+  "description": "React Developer Role",
+  "skills": ["React", "JavaScript"],
   "applyLink": "https://company.com/apply"
 }
 ```
@@ -128,17 +139,13 @@ POST /api/careers
 {
   "success": true,
   "data": {
-    "_id": "685a123456",
+    "_id": "6839abcd1234",
     "jobTitle": "Frontend Developer",
     "department": "Engineering",
     "location": "Remote",
-    "experience": "1-3 Years",
-    "description": "React Developer Required",
-    "skills": [
-      "React",
-      "JavaScript",
-      "Tailwind CSS"
-    ],
+    "experience": "2+ Years",
+    "description": "React Developer Role",
+    "skills": ["React", "JavaScript"],
     "applyLink": "https://company.com/apply"
   }
 }
@@ -148,34 +155,33 @@ POST /api/careers
 
 ## 4. Update Career
 
-### Endpoint
+### Request
 
-```http
 PUT /api/careers/:id
-```
 
 ### Example
 
-```http
-PUT /api/careers/685a123456
-```
+PUT https://going-scam-unclamped.ngrok-free.dev/api/careers/6839abcd1234
 
 ### Request Body
 
 ```json
 {
-  "experience": "2-4 Years"
+  "experience": "3+ Years"
 }
 ```
 
-### Response
+### Success Response
 
 ```json
 {
   "success": true,
   "data": {
-    "_id": "685a123456",
-    "experience": "2-4 Years"
+    "_id": "6839abcd1234",
+    "jobTitle": "Frontend Developer",
+    "department": "Engineering",
+    "location": "Remote",
+    "experience": "3+ Years"
   }
 }
 ```
@@ -184,19 +190,15 @@ PUT /api/careers/685a123456
 
 ## 5. Delete Career
 
-### Endpoint
+### Request
 
-```http
 DELETE /api/careers/:id
-```
 
 ### Example
 
-```http
-DELETE /api/careers/685a123456
-```
+DELETE https://going-scam-unclamped.ngrok-free.dev/api/careers/6839abcd1234
 
-### Response
+### Success Response
 
 ```json
 {
@@ -207,69 +209,44 @@ DELETE /api/careers/685a123456
 
 ---
 
-# Career Object Structure
+# Testing
 
-| Field       | Type          | Required |
-| ----------- | ------------- | -------- |
-| jobTitle    | String        | Yes      |
-| department  | String        | Yes      |
-| location    | String        | Yes      |
-| experience  | String        | Yes      |
-| description | String        | Yes      |
-| skills      | Array[String] | No       |
-| applyLink   | String        | No       |
+The APIs were tested using Thunder Client.
 
----
+Tested Operations:
 
-# Frontend Integration Examples
-
-## Fetch All Careers
-
-```javascript
-const response = await fetch(
-  "http://localhost:5000/api/careers"
-);
-
-const data = await response.json();
-console.log(data);
-```
+* Create Career
+* Get All Careers
+* Get Career By ID
+* Update Career
+* Delete Career
 
 ---
 
-## Create Career
+# GitHub Repository
 
-```javascript
-const response = await fetch(
-  "http://localhost:5000/api/careers",
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      jobTitle: "Frontend Developer",
-      department: "Engineering",
-      location: "Remote",
-      experience: "1-3 Years",
-      description: "React Developer Required"
-    })
-  }
-);
+Repository:
 
-const data = await response.json();
-console.log(data);
-```
+https://github.com/FARIDHA-BANU/careers-backend
 
 ---
 
-# Status Codes
+# Notes For Frontend Team
 
-| Code | Description           |
-| ---- | --------------------- |
-| 200  | Success               |
-| 201  | Resource Created      |
-| 404  | Resource Not Found    |
-| 500  | Internal Server Error |
+Base URL:
 
-```
-```
+https://going-scam-unclamped.ngrok-free.dev
+
+Available Endpoints:
+
+GET /api/careers
+
+GET /api/careers/:id
+
+POST /api/careers
+
+PUT /api/careers/:id
+
+DELETE /api/careers/:id
+
+Use JSON format for all request bodies and responses.
